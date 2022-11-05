@@ -10,6 +10,7 @@ __pycache__/
 .Python
 .idea/
 django4funVENV/
+media/
 build/
 develop-eggs/
 dist/
