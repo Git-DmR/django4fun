@@ -31,7 +31,7 @@ class Category(models.Model):
 
 
     def __str__(self):
-        return f'{self.title.upper()}'
+        return f'{self.title}'.upper()
 
     class Meta:
         verbose_name = 'Категория'
