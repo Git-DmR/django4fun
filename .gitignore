@@ -10,6 +10,8 @@ __pycache__/
 .Python
 .idea/
 django4funVENV/
+d4f/static/
+d4f/d4f/static
 media/
 build/
 develop-eggs/
