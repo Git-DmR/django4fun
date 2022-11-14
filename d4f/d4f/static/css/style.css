@@ -1,3 +1,13 @@
 body{
     background-color: #ccc;
 }
+
+.invalid-feedback{
+    display: block;
+}
+
+.errorlist{
+    display: block;
+    color: red;
+
+}

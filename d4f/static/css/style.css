@@ -1,3 +1,9 @@
 body{
     background-color: #ccc;
 }
+
+.errorlist{
+    display: inline;
+    color: red;
+
+}

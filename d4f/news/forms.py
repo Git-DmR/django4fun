@@ -1,6 +1,7 @@
 from django import forms
 from .models import News
-
+import re
+from django.core.exceptions import ValidationError
 
 class NewsForm(forms.ModelForm):
     class Meta:
@@ -12,6 +13,29 @@ class NewsForm(forms.ModelForm):
             "is_published" : forms.CheckboxInput(),
             "category" : forms.Select(attrs={"class":"form-control"}),
         }
+
+    def clean_title(self):
+        title = self.cleaned_data['title']
+        if re.match(r'\d', title):
+            raise ValidationError("Название не должно начинаться с цифры.")
+        return title
+
+    def clean_content(self):
+        content = self.cleaned_data['content']
+        if content == "":
+            raise ValidationError("Содержание новости не может быть пустым.")
+        return content
+
+    def clean_category(self):
+        category = self.cleaned_data['category']
+        if category == None:
+            raise ValidationError("Поле обязательно для заполнения.")
+        else:
+            return category
+
+
+
+
 
 # from django import forms
 # from .models import Category
