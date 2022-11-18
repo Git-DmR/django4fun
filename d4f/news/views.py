@@ -1,15 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 
 from .models import News, Category
-from .forms  import NewsForm
+from .forms import NewsForm
 
 
 class HomeNews(ListView):
     model = News
     template_name = 'news/home_news_list.html'
     context_object_name = 'news'
-    # extra_context = {"title" : "HomePage"}
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -32,7 +30,7 @@ class NewsByCategory(ListView):
         return context
 
     def get_queryset(self):
-        return News.objects.filter(category_id=self.kwargs['category_id'],  is_published=True)
+        return News.objects.filter(category_id=self.kwargs['category_id'], is_published=True)
 
 
 class ViewSingleNews(DetailView):
@@ -41,25 +39,6 @@ class ViewSingleNews(DetailView):
     context_object_name = "news_item"
 
 
-
-def add_news(request):
-    if request.method == 'POST':
-        form = NewsForm(request.POST)
-        if form.is_valid():
-            # print(form.cleaned_data)
-            news = form.save()
-            return redirect(news)
-    else:
-        form = NewsForm()
-    return render(request, 'news/add_news.html', {'form': form})
-
-def add_news(request):
-    if request.method == 'POST':
-        form = NewsForm(request.POST)
-        if form.is_valid():
-            # print(form.cleaned_data)
-            News.objects.create(**form.cleaned_data)
-            return redirect("home")
-    else:
-        form = NewsForm()
-    return render(request, 'news/add_news.html', {'form': form})
+class CreateNews(CreateView):
+    form_class = NewsForm
+    template_name = "news/add_news.html"
