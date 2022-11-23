@@ -6,6 +6,7 @@ from .forms import NewsForm
 
 
 class HomeNews(ListView):
+    paginate_by = 10
     model = News
     template_name = 'news/home_news_list.html'
     context_object_name = 'news'
@@ -20,6 +21,7 @@ class HomeNews(ListView):
 
 
 class NewsByCategory(ListView):
+    paginate_by = 2
     model = News
     template_name = 'news/home_news_list.html'
     context_object_name = 'news'
